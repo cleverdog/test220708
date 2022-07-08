@@ -1,0 +1,34 @@
+@page "/view-2"
+@inject Northwind.NorthwindService northwindService
+
+<div class="row-layout view-2-container">
+    <IgbDataGrid DataSource="northwindEmployees" Density="ControlDisplayDensity.Cosy" AutoGenerateColumns="false" SelectionMode="GridSelectionMode.None" DefaultColumnMinWidth="136" class="grid" view-2-scope>
+        <IgbDataGridToolbar ToolbarTitle="Grid Toolbar">
+            <span>GridToolbarActions not yet available in Blazor</span>
+        </IgbDataGridToolbar>
+        <IgbNumericColumn HeaderText="employeeID" Field="EmployeeID" IsFilteringEnabled="true"></IgbNumericColumn>
+        <IgbTextColumn HeaderText="lastName" Field="LastName" IsFilteringEnabled="true"></IgbTextColumn>
+        <IgbTextColumn HeaderText="firstName" Field="FirstName" IsFilteringEnabled="true"></IgbTextColumn>
+        <IgbTextColumn HeaderText="title" Field="Title" IsFilteringEnabled="true"></IgbTextColumn>
+        <IgbTextColumn HeaderText="titleOfCourtesy" Field="TitleOfCourtesy" IsFilteringEnabled="true"></IgbTextColumn>
+        <IgbDateTimeColumn HeaderText="birthDate" Field="BirthDate" IsFilteringEnabled="true"></IgbDateTimeColumn>
+        <IgbDateTimeColumn HeaderText="hireDate" Field="HireDate" IsFilteringEnabled="true"></IgbDateTimeColumn>
+        <IgbTextColumn HeaderText="street" Field="Address.Street" IsFilteringEnabled="true"></IgbTextColumn>
+        <IgbTextColumn HeaderText="city" Field="Address.City" IsFilteringEnabled="true"></IgbTextColumn>
+        <IgbTextColumn HeaderText="region" Field="Address.Region" IsFilteringEnabled="true"></IgbTextColumn>
+        <IgbTextColumn HeaderText="postalCode" Field="Address.PostalCode" IsFilteringEnabled="true"></IgbTextColumn>
+        <IgbTextColumn HeaderText="country" Field="Address.Country" IsFilteringEnabled="true"></IgbTextColumn>
+        <IgbTextColumn HeaderText="phone" Field="Address.Phone" IsFilteringEnabled="true"></IgbTextColumn>
+        <IgbTextColumn HeaderText="notes" Field="Notes" IsFilteringEnabled="true"></IgbTextColumn>
+        <IgbTextColumn HeaderText="avatarUrl" Field="AvatarUrl" IsFilteringEnabled="true"></IgbTextColumn>
+    </IgbDataGrid>
+</div>
+
+@code {
+    private Northwind.EmployeesType[] northwindEmployees = Array.Empty<Northwind.EmployeesType>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        northwindEmployees = await this.northwindService.GetEmployees() ?? northwindEmployees;
+    }
+}

@@ -1,0 +1,29 @@
+@page "/"
+@inject NorthwindCloudApp1.NorthwindCloudApp1Service northwindCloudApp1Service
+
+<div class="row-layout view-1-container">
+    <div class="column-layout group">
+        <IgbDataGrid DataSource="northwindCloudApp1ApiCustomers" Density="ControlDisplayDensity.Cosy" AutoGenerateColumns="false" SelectionMode="GridSelectionMode.None" DefaultColumnMinWidth="136" class="grid" view-1-scope>
+            <IgbTextColumn HeaderText="customerID" Field="CustomerID" IsFilteringEnabled="true"></IgbTextColumn>
+            <IgbTextColumn HeaderText="companyName" Field="CompanyName" IsFilteringEnabled="true"></IgbTextColumn>
+            <IgbTextColumn HeaderText="contactName" Field="ContactName" IsFilteringEnabled="true"></IgbTextColumn>
+            <IgbTextColumn HeaderText="contactTitle" Field="ContactTitle" IsFilteringEnabled="true"></IgbTextColumn>
+            <IgbTextColumn HeaderText="address" Field="Address" IsFilteringEnabled="true"></IgbTextColumn>
+            <IgbTextColumn HeaderText="city" Field="City" IsFilteringEnabled="true"></IgbTextColumn>
+            <IgbTextColumn HeaderText="region" Field="Region" IsFilteringEnabled="true"></IgbTextColumn>
+            <IgbTextColumn HeaderText="postalCode" Field="PostalCode" IsFilteringEnabled="true"></IgbTextColumn>
+            <IgbTextColumn HeaderText="country" Field="Country" IsFilteringEnabled="true"></IgbTextColumn>
+            <IgbTextColumn HeaderText="phone" Field="Phone" IsFilteringEnabled="true"></IgbTextColumn>
+            <IgbTextColumn HeaderText="fax" Field="Fax" IsFilteringEnabled="true"></IgbTextColumn>
+        </IgbDataGrid>
+    </div>
+</div>
+
+@code {
+    private NorthwindCloudApp1.ApiCustomersType[] northwindCloudApp1ApiCustomers = Array.Empty<NorthwindCloudApp1.ApiCustomersType>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        northwindCloudApp1ApiCustomers = await this.northwindCloudApp1Service.GetApiCustomers() ?? northwindCloudApp1ApiCustomers;
+    }
+}
